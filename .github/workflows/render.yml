@@ -22,6 +22,10 @@ jobs:
     timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
+      - name: ffmpeg installieren
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg jq fonts-dejavu-core
       - name: Varianten rendern
         env:
           SOURCE_URL: ${{ inputs.source_url }}
