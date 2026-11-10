@@ -1,0 +1,31 @@
+name: render
+
+on:
+  workflow_dispatch:
+    inputs:
+      batch_id:
+        description: "Batch-Name, beginnt mit Datum JJJJMMTT"
+        required: true
+      source_url:
+        description: "Direkte URL des Quell-Videos"
+        required: true
+      hooks:
+        description: "Hook-Texte, getrennt durch |"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: Varianten rendern
+        env:
+          SOURCE_URL: ${{ inputs.source_url }}
+          BATCH_ID: ${{ inputs.batch_id }}
+          HOOKS: ${{ inputs.hooks }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: bash render.sh
