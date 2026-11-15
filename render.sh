@@ -19,10 +19,13 @@ SPEECH=0
 if ffprobe -v error -select_streams a:0 -show_entries stream=codec_type -of csv=p=0 "$WORK/source.mp4" | grep -q audio; then
   if ffmpeg -y -loglevel error -i "$WORK/source.mp4" -vn -ac 1 -ar 16000 "$WORK/a.wav" && pip install -q --break-system-packages faster-whisper >"$WORK/pip.log" 2>&1; then
     WORDS=$(python3 - "$WORK/a.wav" <<'PY' 2>"$WORK/py.err" || echo -1
-import sys
+import sys, wave
+import numpy as np
 from faster_whisper import WhisperModel
 m = WhisperModel("tiny", device="cpu", compute_type="int8")
-segs, info = m.transcribe(sys.argv[1], vad_filter=True)
+w = wave.open(sys.argv[1])
+aud = np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float32) / 32768.0
+segs, info = m.transcribe(aud, vad_filter=True)
 print(sum(len(s.text.split()) for s in segs if s.no_speech_prob < 0.5))
 PY
 )
