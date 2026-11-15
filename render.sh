@@ -14,6 +14,18 @@ curl -fsSL --retry 3 -o "$WORK/source.mp4" "$SOURCE_URL"
 W=$(ffprobe -v error -select_streams v:0 -show_entries stream=width -of csv=p=0 "$WORK/source.mp4")
 H=$(ffprobe -v error -select_streams v:0 -show_entries stream=height -of csv=p=0 "$WORK/source.mp4")
 
+# Lizenzfreie Musik (Pixabay Content License); Download optional, ohne Musik bleibt der Originalton
+mkdir -p "$WORK/mus"
+k=0
+for u in 2026/10/08/audio_05b3828b90 2026/07/29/audio_5065cf04e4 2026/10/10/audio_777101bd7e 2026/10/28/audio_b00b8dab00 2026/09/19/audio_296e4eb904 2026/11/12/audio_59da2cf69e 2026/08/04/audio_a07a6b2841 2026/11/05/audio_a8e61a4ad7 2026/08/20/audio_1ccdcf375d 2026/08/21/audio_48e2266529 2026/07/06/audio_c0a2721743 2026/10/19/audio_01cd203c4c; do
+  k=$((k+1))
+  curl -fsSL --retry 2 -m 60 -A "Mozilla/5.0" -e "https://pixabay.com/" -o "$WORK/mus/m$k.mp3" "https://cdn.pixabay.com/download/audio/$u.mp3" 2>/dev/null || rm -f "$WORK/mus/m$k.mp3"
+done
+MFILES=("$WORK"/mus/m*.mp3)
+[ -e "${MFILES[0]}" ] || MFILES=()
+echo "Musikdateien: ${#MFILES[@]}"
+DAYN=$((10#$(date +%j)))
+
 if git clone --quiet --depth 1 --branch gh-pages "$REMOTE" pages 2>/dev/null; then
   echo "gh-pages vorhanden"
 else
@@ -48,13 +60,21 @@ for RAW in "${HOOK_LIST[@]}"; do
   CW=$(awk -v w="$W" -v z="$ZOOM" 'BEGIN{printf "%d", int(w/z/2)*2}')
   CH=$(awk -v h="$H" -v z="$ZOOM" 'BEGIN{printf "%d", int(h/z/2)*2}')
   echo "$HOOK" | fold -s -w 24 > "$WORK/hook.txt"
-  VF="crop=$CW:$CH,scale=$W:$H:flags=lanczos,eq=brightness=$BRI:saturation=$SAT,hue=h=$HUE,drawtext=fontfile=$FONT:textfile=$WORK/hook.txt:fontcolor=white:fontsize=h/26:line_spacing=10:box=1:boxcolor=black@0.45:boxborderw=18:x=(w-text_w)/2:y=h*$YPOS/100:enable='lt(t,3.2)'"
+  case $((i % 6)) in
+    0) LOOK="null";;
+    1) LOOK="colorbalance=rs=.08:gs=.02:bs=-.08:rm=.06:bm=-.06";;
+    2) LOOK="colorbalance=rs=-.06:bs=.08:rm=-.05:bm=.07";;
+    3) LOOK="curves=preset=medium_contrast";;
+    4) LOOK="eq=contrast=0.93:gamma=1.06";;
+    5) LOOK="vignette=PI/5";;
+  esac
+  VF="crop=$CW:$CH,scale=$W:$H:flags=lanczos,eq=brightness=$BRI:saturation=$SAT,hue=h=$HUE,$LOOK,drawtext=fontfile=$FONT:textfile=$WORK/hook.txt:fontcolor=white:fontsize=h/26:line_spacing=10:box=1:boxcolor=black@0.45:boxborderw=18:x=(w-text_w)/2:y=h*$YPOS/100:enable='lt(t,3.2)'"
   MODE=hook
   if [ "$i" -ge 6 ] && [ "$i" -le 9 ]; then MODE=plain; fi
   if [ "$i" -ge 10 ] || [[ "$BATCH_ID" == *frame* ]]; then MODE=frame; fi
   if [ "$MODE" = "frame" ]; then
     FW=$((560 + (i % 3) * 20))
-    FC="[0:v]split[a][b];[a]scale=720:1280:force_original_aspect_ratio=increase,crop=720:1280,boxblur=28:4,eq=brightness=-0.18:saturation=1.1[bg];[b]crop=$CW:$CH,scale=$FW:-2,eq=brightness=$BRI:saturation=$SAT[fg];[bg][fg]overlay=(W-w)/2:(H-h)/2+40,drawtext=fontfile=$FONT:textfile=$WORK/hook.txt:fontcolor=white:fontsize=44:line_spacing=10:box=1:boxcolor=black@0.45:boxborderw=16:x=(w-text_w)/2:y=110:enable='lt(t,3.2)'[o]"
+    FC="[0:v]split[a][b];[a]scale=720:1280:force_original_aspect_ratio=increase,crop=720:1280,boxblur=28:4,eq=brightness=-0.18:saturation=1.1[bg];[b]crop=$CW:$CH,scale=$FW:-2,eq=brightness=$BRI:saturation=$SAT,$LOOK[fg];[bg][fg]overlay=(W-w)/2:(H-h)/2+40,drawtext=fontfile=$FONT:textfile=$WORK/hook.txt:fontcolor=white:fontsize=44:line_spacing=10:box=1:boxcolor=black@0.45:boxborderw=16:x=(w-text_w)/2:y=110:enable='lt(t,3.2)'[o]"
     ffmpeg -y -loglevel error -ss "$SS" -i "$WORK/source.mp4" -filter_complex "$FC" -map '[o]' -map '0:a?' \
       -c:v libx264 -preset veryfast -crf 22 -pix_fmt yuv420p -c:a aac -b:a 128k -movflags +faststart -t 90 \
       "pages/out/$BATCH_ID/v$N.mp4"
@@ -63,6 +83,16 @@ for RAW in "${HOOK_LIST[@]}"; do
     ffmpeg -y -loglevel error -ss "$SS" -i "$WORK/source.mp4" -vf "$VF" -map 0:v -map '0:a?' \
       -c:v libx264 -preset veryfast -crf 22 -pix_fmt yuv420p -c:a aac -b:a 128k -movflags +faststart -t 90 \
       "pages/out/$BATCH_ID/v$N.mp4"
+  fi
+  AM=$((i % 3))
+  if [ "$AM" -ne 0 ] && [ "${#MFILES[@]}" -gt 0 ]; then
+    MT="${MFILES[$(( (i + DAYN) % ${#MFILES[@]} ))]}"
+    OUTF="pages/out/$BATCH_ID/v$N.mp4"
+    if [ "$AM" -eq 1 ]; then
+      ffmpeg -y -loglevel error -i "$OUTF" -stream_loop -1 -i "$MT" -map 0:v -map 1:a -c:v copy -c:a aac -b:a 128k -af "volume=0.9" -shortest -movflags +faststart "$WORK/mix.mp4" && mv "$WORK/mix.mp4" "$OUTF" || true
+    else
+      ffmpeg -y -loglevel error -i "$OUTF" -stream_loop -1 -i "$MT" -filter_complex "[0:a]volume=0.5[a0];[1:a]volume=0.35[a1];[a0][a1]amix=inputs=2:duration=first:dropout_transition=0[a]" -map 0:v -map "[a]" -c:v copy -c:a aac -b:a 128k -shortest -movflags +faststart "$WORK/mix.mp4" && mv "$WORK/mix.mp4" "$OUTF" || true
+    fi
   fi
   jq -n --arg id "v$N" --arg hook "$HOOK" --arg url "https://$OWNER.github.io/$REPO/out/$BATCH_ID/v$N.mp4" \
     '{id:$id,hook:$hook,url:$url}' >> "$WORK/items.jsonl"
