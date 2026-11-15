@@ -94,7 +94,7 @@ for RAW in "${HOOK_LIST[@]}"; do
   VF="crop=$CW:$CH,scale=$W:$H:flags=lanczos,eq=brightness=$BRI:saturation=$SAT,hue=h=$HUE,$LOOK,drawtext=fontfile=$FONT:textfile=$WORK/hook.txt:fontcolor=white:fontsize=h/26:line_spacing=10:box=1:boxcolor=black@0.45:boxborderw=18:x=(w-text_w)/2:y=h*$YPOS/100:enable='lt(t,3.2)'"
   MODE=hook
   if [ "$i" -ge 6 ] && [ "$i" -le 9 ]; then MODE=plain; fi
-  if [ "$i" -ge 10 ] || [[ "$BATCH_ID" == *frame* ]]; then MODE=frame; fi
+  if [ "$i" -ge 10 ] || [[ "$BATCH_ID" == *frame* ]] || { [[ "$BATCH_ID" == *-dorian-* ]] && [ $((i % 2)) -eq 0 ]; }; then MODE=frame; fi
   if [ "$MODE" = "frame" ]; then
     FW=$((560 + (i % 3) * 20))
     FC="[0:v]split[a][b];[a]scale=720:1280:force_original_aspect_ratio=increase,crop=720:1280,boxblur=28:4,eq=brightness=-0.18:saturation=1.1[bg];[b]crop=$CW:$CH,scale=$FW:-2,eq=brightness=$BRI:saturation=$SAT,$LOOK[fg];[bg][fg]overlay=(W-w)/2:(H-h)/2+40,drawtext=fontfile=$FONT:textfile=$WORK/hook.txt:fontcolor=white:fontsize=44:line_spacing=10:box=1:boxcolor=black@0.45:boxborderw=16:x=(w-text_w)/2:y=110:enable='lt(t,3.2')[o]"
