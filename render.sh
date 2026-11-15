@@ -107,8 +107,8 @@ for RAW in "${HOOK_LIST[@]}"; do
       -c:v libx264 -preset veryfast -crf 22 -pix_fmt yuv420p -c:a aac -b:a 128k -movflags +faststart -t 90 \
       "pages/out/$BATCH_ID/v$N.mp4"
   fi
-  AM=1
-  if [ "$SPEECH" = 1 ]; then AM=0; fi
+  AM=0
+  if [ $((i % 5)) -eq 4 ] && [ "$SPEECH" = 0 ]; then AM=1; fi
   if [ "$AM" -ne 0 ] && [ "${#MFILES[@]}" -gt 0 ]; then
     MT="${MFILES[$(( (i + DAYN) % ${#MFILES[@]} ))]}"
     OUTF="pages/out/$BATCH_ID/v$N.mp4"
