@@ -14,6 +14,25 @@ curl -fsSL --retry 3 -o "$WORK/source.mp4" "$SOURCE_URL"
 W=$(ffprobe -v error -select_streams v:0 -show_entries stream=width -of csv=p=0 "$WORK/source.mp4")
 H=$(ffprobe -v error -select_streams v:0 -show_entries stream=height -of csv=p=0 "$WORK/source.mp4")
 
+# Spracherkennung (einmal pro Quelle): mit Sprache bleibt nur der Originalton, ohne Sprache nur Musik
+SPEECH=0
+if ffprobe -v error -select_streams a:0 -show_entries stream=codec_type -of csv=p=0 "$WORK/source.mp4" | grep -q audio; then
+  if ffmpeg -y -loglevel error -i "$WORK/source.mp4" -vn -ac 1 -ar 16000 "$WORK/a.wav" && pip install -q --break-system-packages faster-whisper >/dev/null 2>&1; then
+    WORDS=$(python3 - "$WORK/a.wav" <<'PY' 2>/dev/null || echo -1
+import sys
+from faster_whisper import WhisperModel
+m = WhisperModel("tiny", device="cpu", compute_type="int8")
+segs, info = m.transcribe(sys.argv[1], vad_filter=True)
+print(sum(len(s.text.split()) for s in segs if s.no_speech_prob < 0.5))
+PY
+)
+    if [ "${WORDS:--1}" -ge 3 ] || [ "${WORDS:--1}" -lt 0 ]; then SPEECH=1; fi
+  else
+    SPEECH=1
+  fi
+fi
+echo "Sprache erkannt: $SPEECH (Woerter: ${WORDS:-0})"
+
 # Lizenzfreie Musik (Pixabay Content License); Download optional, ohne Musik bleibt der Originalton
 mkdir -p "$WORK/mus"
 k=0
@@ -74,7 +93,7 @@ for RAW in "${HOOK_LIST[@]}"; do
   if [ "$i" -ge 10 ] || [[ "$BATCH_ID" == *frame* ]]; then MODE=frame; fi
   if [ "$MODE" = "frame" ]; then
     FW=$((560 + (i % 3) * 20))
-    FC="[0:v]split[a][b];[a]scale=720:1280:force_original_aspect_ratio=increase,crop=720:1280,boxblur=28:4,eq=brightness=-0.18:saturation=1.1[bg];[b]crop=$CW:$CH,scale=$FW:-2,eq=brightness=$BRI:saturation=$SAT,$LOOK[fg];[bg][fg]overlay=(W-w)/2:(H-h)/2+40,drawtext=fontfile=$FONT:textfile=$WORK/hook.txt:fontcolor=white:fontsize=44:line_spacing=10:box=1:boxcolor=black@0.45:boxborderw=16:x=(w-text_w)/2:y=110:enable='lt(t,3.2)'[o]"
+    FC="[0:v]split[a][b];[a]scale=720:1280:force_original_aspect_ratio=increase,crop=720:1280,boxblur=28:4,eq=brightness=-0.18:saturation=1.1[bg];[b]crop=$CW:$CH,scale=$FW:-2,eq=brightness=$BRI:saturation=$SAT,$LOOK[fg];[bg][fg]overlay=(W-w)/2:(H-h)/2+40,drawtext=fontfile=$FONT:textfile=$WORK/hook.txt:fontcolor=white:fontsize=44:line_spacing=10:box=1:boxcolor=black@0.45:boxborderw=16:x=(w-text_w)/2:y=110:enable='lt(t,3.2')[o]"
     ffmpeg -y -loglevel error -ss "$SS" -i "$WORK/source.mp4" -filter_complex "$FC" -map '[o]' -map '0:a?' \
       -c:v libx264 -preset veryfast -crf 22 -pix_fmt yuv420p -c:a aac -b:a 128k -movflags +faststart -t 90 \
       "pages/out/$BATCH_ID/v$N.mp4"
@@ -84,7 +103,8 @@ for RAW in "${HOOK_LIST[@]}"; do
       -c:v libx264 -preset veryfast -crf 22 -pix_fmt yuv420p -c:a aac -b:a 128k -movflags +faststart -t 90 \
       "pages/out/$BATCH_ID/v$N.mp4"
   fi
-  AM=2
+  AM=1
+  if [ "$SPEECH" = 1 ]; then AM=0; fi
   if [ "$AM" -ne 0 ] && [ "${#MFILES[@]}" -gt 0 ]; then
     MT="${MFILES[$(( (i + DAYN) % ${#MFILES[@]} ))]}"
     OUTF="pages/out/$BATCH_ID/v$N.mp4"
