@@ -49,9 +49,17 @@ for RAW in "${HOOK_LIST[@]}"; do
   CH=$(awk -v h="$H" -v z="$ZOOM" 'BEGIN{printf "%d", int(h/z/2)*2}')
   echo "$HOOK" | fold -s -w 24 > "$WORK/hook.txt"
   VF="crop=$CW:$CH,scale=$W:$H:flags=lanczos,eq=brightness=$BRI:saturation=$SAT,hue=h=$HUE,drawtext=fontfile=$FONT:textfile=$WORK/hook.txt:fontcolor=white:fontsize=h/26:line_spacing=10:box=1:boxcolor=black@0.45:boxborderw=18:x=(w-text_w)/2:y=h*$YPOS/100:enable='lt(t,3.2)'"
-  ffmpeg -y -loglevel error -ss "$SS" -i "$WORK/source.mp4" -vf "$VF" -map 0:v -map '0:a?' \
-    -c:v libx264 -preset veryfast -crf 22 -pix_fmt yuv420p -c:a aac -b:a 128k -movflags +faststart -t 90 \
-    "pages/out/$BATCH_ID/v$N.mp4"
+  if [[ "$BATCH_ID" == *frame* ]]; then
+    FW=$((560 + (i % 3) * 20))
+    FC="[0:v]split[a][b];[a]scale=720:1280:force_original_aspect_ratio=increase,crop=720:1280,boxblur=28:4,eq=brightness=-0.18:saturation=1.1[bg];[b]crop=$CW:$CH,scale=$FW:-2,eq=brightness=$BRI:saturation=$SAT[fg];[bg][fg]overlay=(W-w)/2:(H-h)/2+40,drawtext=fontfile=$FONT:textfile=$WORK/hook.txt:fontcolor=white:fontsize=44:line_spacing=10:box=1:boxcolor=black@0.45:boxborderw=16:x=(w-text_w)/2:y=110:enable='lt(t,3.2)'[o]"
+    ffmpeg -y -loglevel error -ss "$SS" -i "$WORK/source.mp4" -filter_complex "$FC" -map '[o]' -map '0:a?' \
+      -c:v libx264 -preset veryfast -crf 22 -pix_fmt yuv420p -c:a aac -b:a 128k -movflags +faststart -t 90 \
+      "pages/out/$BATCH_ID/v$N.mp4"
+  else
+    ffmpeg -y -loglevel error -ss "$SS" -i "$WORK/source.mp4" -vf "$VF" -map 0:v -map '0:a?' \
+      -c:v libx264 -preset veryfast -crf 22 -pix_fmt yuv420p -c:a aac -b:a 128k -movflags +faststart -t 90 \
+      "pages/out/$BATCH_ID/v$N.mp4"
+  fi
   jq -n --arg id "v$N" --arg hook "$HOOK" --arg url "https://$OWNER.github.io/$REPO/out/$BATCH_ID/v$N.mp4" \
     '{id:$id,hook:$hook,url:$url}' >> "$WORK/items.jsonl"
   echo "Variante $N fertig"
