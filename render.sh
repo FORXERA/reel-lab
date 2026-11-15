@@ -94,7 +94,7 @@ for RAW in "${HOOK_LIST[@]}"; do
   VF="crop=$CW:$CH,scale=$W:$H:flags=lanczos,eq=brightness=$BRI:saturation=$SAT,hue=h=$HUE,$LOOK,drawtext=fontfile=$FONT:textfile=$WORK/hook.txt:fontcolor=white:fontsize=h/26:line_spacing=10:box=1:boxcolor=black@0.45:boxborderw=18:x=(w-text_w)/2:y=h*$YPOS/100:enable='lt(t,3.2)'"
   MODE=hook
   SHOWHOOK=1
-  if [[ "$BATCH_ID" == *-dorian-* || "$BATCH_ID" == *frame* ]]; then
+  if [[ "$BATCH_ID" == *frame* || ( "$BATCH_ID" == *-dorian-* && "${BATCH_ID:0:8}" -lt 20261116 ) ]]; then
     # bisheriges Verhalten (Dorian und Frame-Chargen)
     if [ "$i" -ge 6 ] && [ "$i" -le 9 ]; then MODE=plain; fi
     if [ "$i" -ge 10 ] || [[ "$BATCH_ID" == *frame* ]] || { [[ "$BATCH_ID" == *-dorian-* ]] && [ $((i % 2)) -eq 0 ]; }; then MODE=frame; fi
