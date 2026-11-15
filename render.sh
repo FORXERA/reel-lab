@@ -17,8 +17,8 @@ H=$(ffprobe -v error -select_streams v:0 -show_entries stream=height -of csv=p=0
 # Spracherkennung (einmal pro Quelle): mit Sprache bleibt nur der Originalton, ohne Sprache nur Musik
 SPEECH=0
 if ffprobe -v error -select_streams a:0 -show_entries stream=codec_type -of csv=p=0 "$WORK/source.mp4" | grep -q audio; then
-  if ffmpeg -y -loglevel error -i "$WORK/source.mp4" -vn -ac 1 -ar 16000 "$WORK/a.wav" && pip install -q --break-system-packages faster-whisper >/dev/null 2>&1; then
-    WORDS=$(python3 - "$WORK/a.wav" <<'PY' 2>/dev/null || echo -1
+  if ffmpeg -y -loglevel error -i "$WORK/source.mp4" -vn -ac 1 -ar 16000 "$WORK/a.wav" && pip install -q --break-system-packages faster-whisper >"$WORK/pip.log" 2>&1; then
+    WORDS=$(python3 - "$WORK/a.wav" <<'PY' 2>"$WORK/py.err" || echo -1
 import sys
 from faster_whisper import WhisperModel
 m = WhisperModel("tiny", device="cpu", compute_type="int8")
@@ -31,6 +31,7 @@ PY
     SPEECH=1
   fi
 fi
+tail -n 3 "$WORK/pip.log" 2>/dev/null || true; tail -n 6 "$WORK/py.err" 2>/dev/null || true
 echo "Sprache erkannt: $SPEECH (Woerter: ${WORDS:-0})"
 
 # Lizenzfreie Musik (Pixabay Content License); Download optional, ohne Musik bleibt der Originalton
