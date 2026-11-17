@@ -139,11 +139,40 @@ done
 
 jq -s --arg batch "$BATCH_ID" '{batch:$batch,variants:.}' "$WORK/items.jsonl" > "pages/out/$BATCH_ID/manifest.json"
 
-cd pages
-git config user.name "reel-lab"
-git config user.email "actions@users.noreply.github.com"
-git checkout -q --orphan tmp 2>/dev/null || git checkout -q -b tmp
-git add -A
-git commit -q -m "batch $BATCH_ID"
-git push -q -f origin tmp:gh-pages
+# Veroeffentlichen: bei gleichzeitigen Laeufen den aktuellen gh-pages-Stand frisch holen,
+# nur den eigenen Batch dazulegen und bei Konflikt (Ref-Lock) neu versuchen.
+KEEP="$WORK/keep"
+mkdir -p "$KEEP"
+cp -r "pages/out/$BATCH_ID" "$KEEP/$BATCH_ID"
+rm -rf pages
+PUSHED=0
+for TRY in 1 2 3 4 5 6 7 8; do
+  rm -rf pages
+  if git clone --quiet --depth 1 --branch gh-pages "$REMOTE" pages 2>/dev/null; then :; else
+    mkdir pages
+    git -C pages init -q -b gh-pages
+    git -C pages remote add origin "$REMOTE"
+  fi
+  mkdir -p pages/out
+  touch pages/.nojekyll
+  for d in pages/out/*; do
+    [ -d "$d" ] || continue
+    b=$(basename "$d")
+    case "$b" in [0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]*) [ "${b:0:8}" -lt "$CUTOFF" ] && rm -rf "$d" || true ;; esac
+  done
+  rm -rf "pages/out/$BATCH_ID"
+  cp -r "$KEEP/$BATCH_ID" "pages/out/$BATCH_ID"
+  (
+    cd pages
+    git config user.name "reel-lab"
+    git config user.email "actions@users.noreply.github.com"
+    git checkout -q --orphan tmp 2>/dev/null || git checkout -q -b tmp
+    git add -A
+    git commit -q -m "batch $BATCH_ID"
+    git push -q -f origin tmp:gh-pages
+  ) && { PUSHED=1; break; }
+  echo "Push abgelehnt (Versuch $TRY), neuer Versuch"
+  sleep $(( (RANDOM % 8) + 3 ))
+done
+[ "$PUSHED" = 1 ] || { echo "Push endgueltig fehlgeschlagen"; exit 1; }
 echo "Fertig: $i Varianten"
