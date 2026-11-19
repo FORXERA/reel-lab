@@ -1,0 +1,30 @@
+{
+  "batch": "20261117-0500-dave",
+  "variants": [
+    {
+      "id": "v01",
+      "hook": "When the flamingo judges you",
+      "url": "https://forxera.github.io/reel-lab/out/20261117-0500-dave/v01.mp4"
+    },
+    {
+      "id": "v02",
+      "hook": "The pink triangle nobody asked",
+      "url": "https://forxera.github.io/reel-lab/out/20261117-0500-dave/v02.mp4"
+    },
+    {
+      "id": "v03",
+      "hook": "Three shades of ridiculous",
+      "url": "https://forxera.github.io/reel-lab/out/20261117-0500-dave/v03.mp4"
+    },
+    {
+      "id": "v04",
+      "hook": "Millionaire sandwich goes pink",
+      "url": "https://forxera.github.io/reel-lab/out/20261117-0500-dave/v04.mp4"
+    },
+    {
+      "id": "v05",
+      "hook": "Pink overload detected",
+      "url": "https://forxera.github.io/reel-lab/out/20261117-0500-dave/v05.mp4"
+    }
+  ]
+}

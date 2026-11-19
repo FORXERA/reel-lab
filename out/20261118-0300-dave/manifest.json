@@ -1,0 +1,30 @@
+{
+  "batch": "20261118-0300-dave",
+  "variants": [
+    {
+      "id": "v01",
+      "hook": "She's been following for miles",
+      "url": "https://forxera.github.io/reel-lab/out/20261118-0300-dave/v01.mp4"
+    },
+    {
+      "id": "v02",
+      "hook": "Hotel checkout got complicated",
+      "url": "https://forxera.github.io/reel-lab/out/20261118-0300-dave/v02.mp4"
+    },
+    {
+      "id": "v03",
+      "hook": "Not the valet I ordered",
+      "url": "https://forxera.github.io/reel-lab/out/20261118-0300-dave/v03.mp4"
+    },
+    {
+      "id": "v04",
+      "hook": "Purple attracts strange friends",
+      "url": "https://forxera.github.io/reel-lab/out/20261118-0300-dave/v04.mp4"
+    },
+    {
+      "id": "v05",
+      "hook": "Best wingman ever",
+      "url": "https://forxera.github.io/reel-lab/out/20261118-0300-dave/v05.mp4"
+    }
+  ]
+}

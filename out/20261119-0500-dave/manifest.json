@@ -1,0 +1,30 @@
+{
+  "batch": "20261119-0500-dave",
+  "variants": [
+    {
+      "id": "v01",
+      "hook": "When the showroom is your stage",
+      "url": "https://forxera.github.io/reel-lab/out/20261119-0500-dave/v01.mp4"
+    },
+    {
+      "id": "v02",
+      "hook": "Nobody said don't dance on it",
+      "url": "https://forxera.github.io/reel-lab/out/20261119-0500-dave/v02.mp4"
+    },
+    {
+      "id": "v03",
+      "hook": "The showroom called security",
+      "url": "https://forxera.github.io/reel-lab/out/20261119-0500-dave/v03.mp4"
+    },
+    {
+      "id": "v04",
+      "hook": "Glass showrooms hate this move",
+      "url": "https://forxera.github.io/reel-lab/out/20261119-0500-dave/v04.mp4"
+    },
+    {
+      "id": "v05",
+      "hook": "Blue Bugatti meets bad choices",
+      "url": "https://forxera.github.io/reel-lab/out/20261119-0500-dave/v05.mp4"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "batch": "20261119-0400-dave",
+  "variants": [
+    {
+      "id": "v01",
+      "hook": "When your legs cost more",
+      "url": "https://forxera.github.io/reel-lab/out/20261119-0400-dave/v01.mp4"
+    },
+    {
+      "id": "v02",
+      "hook": "Nobody told me to stop",
+      "url": "https://forxera.github.io/reel-lab/out/20261119-0400-dave/v02.mp4"
+    },
+    {
+      "id": "v03",
+      "hook": "These legs have seen things",
+      "url": "https://forxera.github.io/reel-lab/out/20261119-0400-dave/v03.mp4"
+    },
+    {
+      "id": "v04",
+      "hook": "Red loafers decide everything",
+      "url": "https://forxera.github.io/reel-lab/out/20261119-0400-dave/v04.mp4"
+    },
+    {
+      "id": "v05",
+      "hook": "Too tall for normal cars",
+      "url": "https://forxera.github.io/reel-lab/out/20261119-0400-dave/v05.mp4"
+    }
+  ]
+}

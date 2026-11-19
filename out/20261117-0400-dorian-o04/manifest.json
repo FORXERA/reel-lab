@@ -1,0 +1,30 @@
+{
+  "batch": "20261117-0400-dorian-o04",
+  "variants": [
+    {
+      "id": "v01",
+      "hook": "They laugh until they see this",
+      "url": "https://forxera.github.io/reel-lab/out/20261117-0400-dorian-o04/v01.mp4"
+    },
+    {
+      "id": "v02",
+      "hook": "Wrong place or right attitude",
+      "url": "https://forxera.github.io/reel-lab/out/20261117-0400-dorian-o04/v02.mp4"
+    },
+    {
+      "id": "v03",
+      "hook": "Hotel guests react differently",
+      "url": "https://forxera.github.io/reel-lab/out/20261117-0400-dorian-o04/v03.mp4"
+    },
+    {
+      "id": "v04",
+      "hook": "Casual wins every single time",
+      "url": "https://forxera.github.io/reel-lab/out/20261117-0400-dorian-o04/v04.mp4"
+    },
+    {
+      "id": "v05",
+      "hook": "Their laughter says everything",
+      "url": "https://forxera.github.io/reel-lab/out/20261117-0400-dorian-o04/v05.mp4"
+    }
+  ]
+}

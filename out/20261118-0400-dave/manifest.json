@@ -1,0 +1,30 @@
+{
+  "batch": "20261118-0400-dave",
+  "variants": [
+    {
+      "id": "v01",
+      "hook": "Pink matches everything today",
+      "url": "https://forxera.github.io/reel-lab/out/20261118-0400-dave/v01.mp4"
+    },
+    {
+      "id": "v02",
+      "hook": "Some friendships cost more",
+      "url": "https://forxera.github.io/reel-lab/out/20261118-0400-dave/v02.mp4"
+    },
+    {
+      "id": "v03",
+      "hook": "Nobody asked for this pairing",
+      "url": "https://forxera.github.io/reel-lab/out/20261118-0400-dave/v03.mp4"
+    },
+    {
+      "id": "v04",
+      "hook": "Tropical parking problems",
+      "url": "https://forxera.github.io/reel-lab/out/20261118-0400-dave/v04.mp4"
+    },
+    {
+      "id": "v05",
+      "hook": "Pet accessories got wild",
+      "url": "https://forxera.github.io/reel-lab/out/20261118-0400-dave/v05.mp4"
+    }
+  ]
+}

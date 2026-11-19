@@ -1,0 +1,30 @@
+{
+  "batch": "20261119-0300-dorian-o22",
+  "variants": [
+    {
+      "id": "v01",
+      "hook": "40s hit different when you train",
+      "url": "https://forxera.github.io/reel-lab/out/20261119-0300-dorian-o22/v01.mp4"
+    },
+    {
+      "id": "v02",
+      "hook": "Age is just your excuse",
+      "url": "https://forxera.github.io/reel-lab/out/20261119-0300-dorian-o22/v02.mp4"
+    },
+    {
+      "id": "v03",
+      "hook": "Most men quit at my age",
+      "url": "https://forxera.github.io/reel-lab/out/20261119-0300-dorian-o22/v03.mp4"
+    },
+    {
+      "id": "v04",
+      "hook": "No gym no problem at 40",
+      "url": "https://forxera.github.io/reel-lab/out/20261119-0300-dorian-o22/v04.mp4"
+    },
+    {
+      "id": "v05",
+      "hook": "Still here still training",
+      "url": "https://forxera.github.io/reel-lab/out/20261119-0300-dorian-o22/v05.mp4"
+    }
+  ]
+}
