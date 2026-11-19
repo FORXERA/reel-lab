@@ -166,10 +166,9 @@ for TRY in 1 2 3 4 5 6 7 8; do
     cd pages
     git config user.name "reel-lab"
     git config user.email "actions@users.noreply.github.com"
-    git checkout -q --orphan tmp 2>/dev/null || git checkout -q -b tmp
     git add -A
     git commit -q -m "batch $BATCH_ID"
-    git push -q -f origin tmp:gh-pages
+    git push -q origin HEAD:gh-pages
   ) && { PUSHED=1; break; }
   echo "Push abgelehnt (Versuch $TRY), neuer Versuch"
   sleep $(( (RANDOM % 8) + 3 ))
