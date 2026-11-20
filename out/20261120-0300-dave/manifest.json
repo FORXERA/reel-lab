@@ -1,0 +1,30 @@
+{
+  "batch": "20261120-0300-dave",
+  "variants": [
+    {
+      "id": "v01",
+      "hook": "Robots are surprisingly slow",
+      "url": "https://forxera.github.io/reel-lab/out/20261120-0300-dave/v01.mp4"
+    },
+    {
+      "id": "v02",
+      "hook": "They said I couldn't outrun AI",
+      "url": "https://forxera.github.io/reel-lab/out/20261120-0300-dave/v02.mp4"
+    },
+    {
+      "id": "v03",
+      "hook": "My legs have an unfair advantage",
+      "url": "https://forxera.github.io/reel-lab/out/20261120-0300-dave/v03.mp4"
+    },
+    {
+      "id": "v04",
+      "hook": "Mechanical opponents stand no ch",
+      "url": "https://forxera.github.io/reel-lab/out/20261120-0300-dave/v04.mp4"
+    },
+    {
+      "id": "v05",
+      "hook": "Even technology can't keep up",
+      "url": "https://forxera.github.io/reel-lab/out/20261120-0300-dave/v05.mp4"
+    }
+  ]
+}
