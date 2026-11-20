@@ -1,0 +1,30 @@
+{
+  "batch": "20261120-0300",
+  "variants": [
+    {
+      "id": "v01",
+      "hook": "They stared at the barefoot guy",
+      "url": "https://forxera.github.io/reel-lab/out/20261120-0300/v01.mp4"
+    },
+    {
+      "id": "v02",
+      "hook": "Watch what happens next",
+      "url": "https://forxera.github.io/reel-lab/out/20261120-0300/v02.mp4"
+    },
+    {
+      "id": "v03",
+      "hook": "Nobody expected this moment",
+      "url": "https://forxera.github.io/reel-lab/out/20261120-0300/v03.mp4"
+    },
+    {
+      "id": "v04",
+      "hook": "Luxury lobby meets dreadlocks",
+      "url": "https://forxera.github.io/reel-lab/out/20261120-0300/v04.mp4"
+    },
+    {
+      "id": "v05",
+      "hook": "He walked in barefoot",
+      "url": "https://forxera.github.io/reel-lab/out/20261120-0300/v05.mp4"
+    }
+  ]
+}
