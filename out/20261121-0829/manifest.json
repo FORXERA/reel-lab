@@ -1,0 +1,30 @@
+{
+  "batch": "20261121-0829",
+  "variants": [
+    {
+      "id": "v01",
+      "hook": "They stared when he sang",
+      "url": "https://forxera.github.io/reel-lab/out/20261121-0829/v01.mp4"
+    },
+    {
+      "id": "v02",
+      "hook": "Barefoot in a five star hotel",
+      "url": "https://forxera.github.io/reel-lab/out/20261121-0829/v02.mp4"
+    },
+    {
+      "id": "v03",
+      "hook": "He walked in and started singing",
+      "url": "https://forxera.github.io/reel-lab/out/20261121-0829/v03.mp4"
+    },
+    {
+      "id": "v04",
+      "hook": "No shoes no shirt no problem",
+      "url": "https://forxera.github.io/reel-lab/out/20261121-0829/v04.mp4"
+    },
+    {
+      "id": "v05",
+      "hook": "When a hippie owns the room",
+      "url": "https://forxera.github.io/reel-lab/out/20261121-0829/v05.mp4"
+    }
+  ]
+}
