@@ -1,0 +1,30 @@
+{
+  "batch": "20261121-0500-dorian-o16",
+  "variants": [
+    {
+      "id": "v01",
+      "hook": "They stopped to stare",
+      "url": "https://forxera.github.io/reel-lab/out/20261121-0500-dorian-o16/v01.mp4"
+    },
+    {
+      "id": "v02",
+      "hook": "Valet had to choose",
+      "url": "https://forxera.github.io/reel-lab/out/20261121-0500-dorian-o16/v02.mp4"
+    },
+    {
+      "id": "v03",
+      "hook": "Hotel parking different",
+      "url": "https://forxera.github.io/reel-lab/out/20261121-0500-dorian-o16/v03.mp4"
+    },
+    {
+      "id": "v04",
+      "hook": "Suits came outside",
+      "url": "https://forxera.github.io/reel-lab/out/20261121-0500-dorian-o16/v04.mp4"
+    },
+    {
+      "id": "v05",
+      "hook": "Two machines one choice",
+      "url": "https://forxera.github.io/reel-lab/out/20261121-0500-dorian-o16/v05.mp4"
+    }
+  ]
+}
