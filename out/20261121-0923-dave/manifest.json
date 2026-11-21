@@ -1,0 +1,30 @@
+{
+  "batch": "20261121-0923-dave",
+  "variants": [
+    {
+      "id": "v01",
+      "hook": "Watch how the rich exit a car",
+      "url": "https://forxera.github.io/reel-lab/out/20261121-0923-dave/v01.mp4"
+    },
+    {
+      "id": "v02",
+      "hook": "The valet saw everything",
+      "url": "https://forxera.github.io/reel-lab/out/20261121-0923-dave/v02.mp4"
+    },
+    {
+      "id": "v03",
+      "hook": "Purple Lamborghini problems",
+      "url": "https://forxera.github.io/reel-lab/out/20261121-0923-dave/v03.mp4"
+    },
+    {
+      "id": "v04",
+      "hook": "Exit strategy unclear",
+      "url": "https://forxera.github.io/reel-lab/out/20261121-0923-dave/v04.mp4"
+    },
+    {
+      "id": "v05",
+      "hook": "When legs meet Lamborghini",
+      "url": "https://forxera.github.io/reel-lab/out/20261121-0923-dave/v05.mp4"
+    }
+  ]
+}
