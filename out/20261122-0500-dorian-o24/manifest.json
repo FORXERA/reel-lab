@@ -1,0 +1,30 @@
+{
+  "batch": "20261122-0500-dorian-o24",
+  "variants": [
+    {
+      "id": "v01",
+      "hook": "Nobody asks how you got here",
+      "url": "https://forxera.github.io/reel-lab/out/20261122-0500-dorian-o24/v01.mp4"
+    },
+    {
+      "id": "v02",
+      "hook": "Tattoos and keys don't lie",
+      "url": "https://forxera.github.io/reel-lab/out/20261122-0500-dorian-o24/v02.mp4"
+    },
+    {
+      "id": "v03",
+      "hook": "This is what 40 looks like",
+      "url": "https://forxera.github.io/reel-lab/out/20261122-0500-dorian-o24/v03.mp4"
+    },
+    {
+      "id": "v04",
+      "hook": "Casual walk expensive problem",
+      "url": "https://forxera.github.io/reel-lab/out/20261122-0500-dorian-o24/v04.mp4"
+    },
+    {
+      "id": "v05",
+      "hook": "They see the car not the work",
+      "url": "https://forxera.github.io/reel-lab/out/20261122-0500-dorian-o24/v05.mp4"
+    }
+  ]
+}
