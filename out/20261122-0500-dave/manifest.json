@@ -1,0 +1,30 @@
+{
+  "batch": "20261122-0500-dave",
+  "variants": [
+    {
+      "id": "v01",
+      "hook": "When sitting needs assistance",
+      "url": "https://forxera.github.io/reel-lab/out/20261122-0500-dave/v01.mp4"
+    },
+    {
+      "id": "v02",
+      "hook": "The Ferrari entry protocol",
+      "url": "https://forxera.github.io/reel-lab/out/20261122-0500-dave/v02.mp4"
+    },
+    {
+      "id": "v03",
+      "hook": "Too low to enter alone",
+      "url": "https://forxera.github.io/reel-lab/out/20261122-0500-dave/v03.mp4"
+    },
+    {
+      "id": "v04",
+      "hook": "Legs versus Italian engineering",
+      "url": "https://forxera.github.io/reel-lab/out/20261122-0500-dave/v04.mp4"
+    },
+    {
+      "id": "v05",
+      "hook": "Green Ferrari green trousers",
+      "url": "https://forxera.github.io/reel-lab/out/20261122-0500-dave/v05.mp4"
+    }
+  ]
+}
