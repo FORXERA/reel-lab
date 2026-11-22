@@ -1,0 +1,30 @@
+{
+  "batch": "20261122-0920-dorian-o24",
+  "variants": [
+    {
+      "id": "v01",
+      "hook": "What most men avoid at 40",
+      "url": "https://forxera.github.io/reel-lab/out/20261122-0920-dorian-o24/v01.mp4"
+    },
+    {
+      "id": "v02",
+      "hook": "Built different after 40",
+      "url": "https://forxera.github.io/reel-lab/out/20261122-0920-dorian-o24/v02.mp4"
+    },
+    {
+      "id": "v03",
+      "hook": "No suit no problem",
+      "url": "https://forxera.github.io/reel-lab/out/20261122-0920-dorian-o24/v03.mp4"
+    },
+    {
+      "id": "v04",
+      "hook": "This is 40 plus done right",
+      "url": "https://forxera.github.io/reel-lab/out/20261122-0920-dorian-o24/v04.mp4"
+    },
+    {
+      "id": "v05",
+      "hook": "They said slow down at 40",
+      "url": "https://forxera.github.io/reel-lab/out/20261122-0920-dorian-o24/v05.mp4"
+    }
+  ]
+}
