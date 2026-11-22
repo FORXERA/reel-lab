@@ -1,0 +1,30 @@
+{
+  "batch": "20261122-0500",
+  "variants": [
+    {
+      "id": "v01",
+      "hook": "They stared at his feet",
+      "url": "https://forxera.github.io/reel-lab/out/20261122-0500/v01.mp4"
+    },
+    {
+      "id": "v02",
+      "hook": "Wrong place for a hippie",
+      "url": "https://forxera.github.io/reel-lab/out/20261122-0500/v02.mp4"
+    },
+    {
+      "id": "v03",
+      "hook": "Bartender judged him twice",
+      "url": "https://forxera.github.io/reel-lab/out/20261122-0500/v03.mp4"
+    },
+    {
+      "id": "v04",
+      "hook": "No shoes no service",
+      "url": "https://forxera.github.io/reel-lab/out/20261122-0500/v04.mp4"
+    },
+    {
+      "id": "v05",
+      "hook": "She smiled at his bare feet",
+      "url": "https://forxera.github.io/reel-lab/out/20261122-0500/v05.mp4"
+    }
+  ]
+}
